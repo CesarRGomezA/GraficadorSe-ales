@@ -59,13 +59,12 @@ namespace GraficadorSeñales
             //Recorre una coleccion o arreglo 
             foreach (Muestra muestra in señal.Muestras)
             {
-                plnGrafica.Points.Add(new Point(muestra.X * scrContenedor.Width, (muestra.Y * ((scrContenedor.Height / 2.0) - 30) * -1) + (scrContenedor.Height / 2)));
+                plnGrafica.Points.Add(new Point(muestra.X * scrContenedor.Width, (muestra.Y / señal.AmplitudMaxima * ((scrContenedor.Height / 2.0) - 30) * -1) + (scrContenedor.Height / 2)));
 
             }
 
-
-
-
+            lblmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString();
+            lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString();
 
         }
 
