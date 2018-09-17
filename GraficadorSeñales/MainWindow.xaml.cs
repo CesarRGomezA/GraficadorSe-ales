@@ -36,22 +36,37 @@ namespace GraficadorSeñales
             double tiempoFinal = double.Parse(txtTiempoFinal.Text);
             double frecuenciaMuestreo = double.Parse(txtFrecuenciadeMuestreo.Text);
 
-            SeñalSenoidal señal = new SeñalSenoidal(amplitud, fase, frecuencia);
+            Señal señal;
 
-            double periodoMuestreo = 1 / frecuenciaMuestreo;
+            switch(cbTipoSeñal.SelectedIndex)
+            {
+                case 0: señal = new SeñalSenoidal(amplitud, fase, frecuencia);
+                    break;
+
+                case 1:
+                    señal = new SeñalRampa();
+                    break;
+                default: señal = null; break;
+            }
+
+            señal.TiempoInicial = tiempoInicial;
+            señal.TiempoFinal = tiempoFinal;
+            señal.FrecuenciaMuestreo = frecuenciaMuestreo;
+
+            señal.construirSeñalDigital();
 
             plnGrafica.Points.Clear();
 
-            for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
+            if (señal != null)
             {
-                double valorMuestra = señal.evaluar(i);
-
-                if (Math.Abs(valorMuestra) > señal.AmplitudMaxima)
+                //Recorre una coleccion o arreglo 
+                foreach (Muestra muestra in señal.Muestras)
                 {
-                    señal.AmplitudMaxima = Math.Abs(valorMuestra);
+                    plnGrafica.Points.Add(new Point((muestra.X - tiempoInicial) * scrContenedor.Width, (muestra.Y / señal.AmplitudMaxima * ((scrContenedor.Height / 2.0) - 30) * -1) + (scrContenedor.Height / 2)));
                 }
 
-                señal.Muestras.Add(new Muestra(i, valorMuestra));
+                lblmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString();
+                lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString();
 
 
             }
@@ -77,9 +92,7 @@ namespace GraficadorSeñales
             plnEjeY.Points.Add(new Point((0 - tiempoInicial) * scrContenedor.Width, (-señal.AmplitudMaxima * ((scrContenedor.Height / 2.0) - 30) * -1) + (scrContenedor.Height / 2)));
 
 
-            lblmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString();
-            lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString();
-
+           
         }
 
         private void btnGraficarRampa_Click(object sender, RoutedEventArgs e)
