@@ -65,6 +65,11 @@ namespace GraficadorSeñales
 
             señal.construirSeñalDigital();
 
+            //Escalar
+            double factorEscala = double.Parse(txtEscalaAmplitud.Text);
+            señal.escalar(factorEscala);
+            señal.actualizarAmplitudMaxima();
+
             plnGrafica.Points.Clear();
 
             if (señal != null)
@@ -120,5 +125,7 @@ namespace GraficadorSeñales
                     break;
             }
         }
+
+    
     }
 }
