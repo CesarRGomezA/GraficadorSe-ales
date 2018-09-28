@@ -33,10 +33,10 @@
         <TextBlock HorizontalAlignment="Left" Margin="739,86,0,0" TextWrapping="Wrap" Text="Tipo de señal" VerticalAlignment="Top"/>
         <TextBox x:Name="txtEscalaAmplitud" HorizontalAlignment="Left" Height="23" Margin="440,40,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="120" />
         <TextBlock HorizontalAlignment="Left" Margin="440,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="Escala de amplitud"/>
-        <TextBox x:Name="txtDes_plazamientoY" HorizontalAlignment="Left" Height="23" Margin="440,100,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="txtDesplazamientoY" HorizontalAlignment="Left" Height="23" Margin="440,100,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" />
         <TextBlock HorizontalAlignment="Left" Margin="440,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="Desplazamiento en Y:"/>
-        <CheckBox Content="" HorizontalAlignment="Left" Margin="565,45,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="" HorizontalAlignment="Left" Margin="565,102,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cb_EscalaAmplitud" Content="" HorizontalAlignment="Left" Margin="565,45,0,0" VerticalAlignment="Top" Click="cb_EscalaAmplitud_Checked"/>
+        <CheckBox x:Name="cb_DesplazamientoY" Content="" HorizontalAlignment="Left" Margin="565,102,0,0" VerticalAlignment="Top" Click="cb_DesplazamientoY_Checked"/>
 
     </Grid>
 </Window>

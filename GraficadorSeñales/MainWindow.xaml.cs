@@ -106,9 +106,31 @@ namespace GraficadorSeñales
            
         }
 
-        
+		private void cb_EscalaAmplitud_Checked(object sender, RoutedEventArgs e)
+		{
+			if (cb_EscalaAmplitud.IsChecked == true)
+			{
+				txtEscalaAmplitud.IsEnabled = true;
+			}
+			else
+			{
+				txtEscalaAmplitud.IsEnabled = false;
+			}
+		}
 
-        private void cbTipoSeñal_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void cb_DesplazamientoY_Checked(object sender, RoutedEventArgs e)
+		{
+			if (cb_DesplazamientoY.IsChecked == true)
+			{
+				txtDesplazamientoY.IsEnabled = true;
+			}
+			else
+			{
+				txtDesplazamientoY.IsEnabled = false;
+			}
+		}
+
+		private void cbTipoSeñal_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             panelConfiguracion.Children.Clear();
             switch(cbTipoSeñal.SelectedIndex)
