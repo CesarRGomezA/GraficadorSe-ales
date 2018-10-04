@@ -54,5 +54,21 @@ namespace GraficadorSeñales
                 }
             }
         }
+
+        public void truncar(double umbral)
+        {
+            foreach (Muestra muestra in Muestras)
+            {
+                if (muestra.Y > umbral)
+                {
+                    muestra.Y = umbral;
+                }
+
+                else if (muestra.Y < -umbral)
+                {
+                    muestra.Y = -umbral;
+                }
+            }
+        }
     }
 }

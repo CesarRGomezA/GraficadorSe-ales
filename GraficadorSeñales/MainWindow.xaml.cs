@@ -70,6 +70,15 @@ namespace GraficadorSeñales
             señal.escalar(factorEscala);
             señal.actualizarAmplitudMaxima();
 
+            //Truncar
+            if ((bool)cb_Umbral.IsChecked)
+            {
+                double factorTruncar = double.Parse(txtUmbral.Text);
+                señal.truncar(factorTruncar);
+            }
+
+            //Examen 
+
             plnGrafica.Points.Clear();
 
             if (señal != null)
@@ -147,7 +156,5 @@ namespace GraficadorSeñales
                     break;
             }
         }
-
-    
     }
 }
