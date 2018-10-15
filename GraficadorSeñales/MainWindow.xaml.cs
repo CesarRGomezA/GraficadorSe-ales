@@ -35,6 +35,7 @@ namespace GraficadorSeñales
             double frecuenciaMuestreo = double.Parse(txtFrecuenciadeMuestreo.Text);
 
             Señal señal;
+            Señal segundaSeñal;
 
             switch (cbTipoSeñal.SelectedIndex)
             {
@@ -57,13 +58,44 @@ namespace GraficadorSeñales
                 default: señal = null; break;
                 
                 
+                
+            }
+
+            switch (cbTipoSeñal_SegundaSeñal.SelectedIndex)
+            {
+                case 0:
+                    double amplitud = double.Parse(((ConfiguracionSeñalSenoidal)panelConfiguracion_SegundaSeñal.Children[0]).txtAmplitud.Text);
+                    double fase = double.Parse(((ConfiguracionSeñalSenoidal)panelConfiguracion_SegundaSeñal.Children[0]).txtFase.Text);
+                    double frecuencia = double.Parse(((ConfiguracionSeñalSenoidal)panelConfiguracion_SegundaSeñal.Children[0]).txtFrecuencia.Text);
+
+                    segundaSeñal = new SeñalSenoidal(amplitud, fase, frecuencia);
+                    break;
+
+                case 1:
+                    segundaSeñal = new SeñalRampa();
+                    break;
+
+                case 2:
+                    double alpha = double.Parse(((ConfiguracionSeñalExponencial)panelConfiguracion_SegundaSeñal.Children[0]).txtAlpha.Text);
+                    segundaSeñal = new SeñalExponencial(alpha);
+                    break;
+                default:
+                    segundaSeñal = null; break;
             }
 
             señal.TiempoInicial = tiempoInicial;
             señal.TiempoFinal = tiempoFinal;
             señal.FrecuenciaMuestreo = frecuenciaMuestreo;
 
+            //segunda señal
+            segundaSeñal.TiempoInicial = tiempoInicial;
+            segundaSeñal.TiempoFinal = tiempoFinal;
+            segundaSeñal.FrecuenciaMuestreo = frecuenciaMuestreo;
+
+            
+
             señal.construirSeñalDigital();
+            segundaSeñal.construirSeñalDigital();
 
             //Escalar
             double factorEscala = double.Parse(txtEscalaAmplitud.Text);
@@ -77,7 +109,19 @@ namespace GraficadorSeñales
                 señal.truncar(factorTruncar);
             }
 
-            
+            //segunda Señal
+
+            //Escalar
+            double factorEscala2 = double.Parse(txtEscalaAmplitud.Text);
+            segundaSeñal.escalar(factorEscala2);
+            segundaSeñal.actualizarAmplitudMaxima();
+
+            //Truncar
+            if ((bool)cb_Umbral_SegundaSeñal.IsChecked)
+            {
+                double factorTruncar2 = double.Parse(txtUmbral_SegundaSeñal.Text);
+                segundaSeñal.truncar(factorTruncar2);
+            }
 
             plnGrafica.Points.Clear();
 
@@ -91,8 +135,6 @@ namespace GraficadorSeñales
 
                 lblmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString("F");
                 lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString("F");
-
-
             }
 
             //Recorre una coleccion o arreglo 
@@ -159,7 +201,20 @@ namespace GraficadorSeñales
 
         private void cbTipoSeñal_SegundaSeñal_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            panelConfiguracion_SegundaSeñal.Children.Clear();
+            switch(cbTipoSeñal_SegundaSeñal.SelectedIndex)
+            {
+                case 0: //Senoidal
+                    panelConfiguracion_SegundaSeñal.Children.Add(new ConfiguracionSeñalSenoidal());
+                    break;
+                case 1://Rampa
+                    break;
+                case 2://Exponencial
+                    panelConfiguracion_SegundaSeñal.Children.Add(new ConfiguracionSeñalExponencial());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
