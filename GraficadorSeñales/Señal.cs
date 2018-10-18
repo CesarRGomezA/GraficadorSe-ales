@@ -70,5 +70,12 @@ namespace GraficadorSeñales
                 }
             }
         }
+
+        public static void sumar(Señal sumando1, Señal sumando2)
+        {
+
+            return null 
+
+        }
     }
 }
