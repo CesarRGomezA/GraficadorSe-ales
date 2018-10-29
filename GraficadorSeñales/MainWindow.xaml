@@ -76,6 +76,7 @@
         <ComboBox x:Name="cbTipoOperacion" Grid.Column="1" HorizontalAlignment="Left" Margin="339,196,0,0" VerticalAlignment="Top" Width="163">
             <ComboBoxItem>Suma</ComboBoxItem>
             <ComboBoxItem>Multiplicacion</ComboBoxItem>
+            <ComboBoxItem>Combolucion</ComboBoxItem>
         </ComboBox>
         <Button x:Name="btnRealizarOperacion" Content="Realizar Operación" Grid.Column="1" HorizontalAlignment="Left" Margin="339,223,0,0" VerticalAlignment="Top" Width="163" Click="btnRealizarOperacion_Click"/>
 
