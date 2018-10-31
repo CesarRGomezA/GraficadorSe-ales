@@ -140,7 +140,7 @@ namespace GraficadorSeñales
                     for (int k = 0; k < operando2.Muestras.Count; k++)
                     {
                         if ((n - k) >= 0 && (n - k) < operando2.Muestras.Count)
-                        valorMuestra += operando1.Muestras[k].Y * operando1.Muestras[n - k].Y;
+                        valorMuestra += operando1.Muestras[k].Y * operando2.Muestras[n - k].Y;
                     }
                     Muestra muestra = new Muestra(instanteActual, valorMuestra); resultado.Muestras.Add(muestra);
                     instanteActual += periodoMuestreo;
